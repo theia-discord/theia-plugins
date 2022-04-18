@@ -9,3 +9,8 @@ help = "`%!` - Show the list of known commands"
 [[command]]
 name = "status"
 help = "`%!` - Show info about Theia's status"
+
+[[command]]
+name = "invite"
+help = "`%!` - Get a link to invite Theia to a Discord server"
+hidden = true

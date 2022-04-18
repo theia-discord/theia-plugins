@@ -1,0 +1,11 @@
+name = "theiacore"
+run = ["python3", "-m", "theia-plugin-core"]
+
+[[command]]
+name = "commands"
+aliases = ["cmds", "help"]
+help = "`%!` - Show the list of known commands"
+
+[[command]]
+name = "status"
+help = "`%!` - Show info about Theia's status"

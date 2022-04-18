@@ -1,0 +1,6 @@
+name = "echotest"
+run = ["bash", "echo.bash"]
+
+[[command]]
+name = "echo"
+help = "`%! <...>` - Echo your message back to you."

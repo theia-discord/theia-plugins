@@ -5,10 +5,12 @@ run = ["python3", "-m", "theia-plugin-core"]
 name = "commands"
 aliases = ["cmds", "help"]
 help = "`%!` - Show the list of known commands"
+hidden = true
 
 [[command]]
 name = "status"
 help = "`%!` - Show info about Theia's status"
+hidden = true
 
 [[command]]
 name = "invite"

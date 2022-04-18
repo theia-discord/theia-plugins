@@ -13,9 +13,15 @@ def cmd_nslookup(mdata):
         message["content"] = "\U0000274c `dns` could not be imported."
         return message.emit()
 
-    record_type = (["A"] + [fl[1:] for fl in mdata["cmd"]["start_flags"] if fl[1:] in RECORD_TYPES])[-1]
-    nameserver = (["9.9.9.9"] + [fl[1:] for fl in mdata["cmd"]["arguments"] if fl.startswith("&")])[-1]
     host = mdata["cmd"]["arguments"][0]
+    record_type = (
+        [RECORD_TYPES[0]]
+        + [fl[1:] for fl in mdata["cmd"]["start_flags"] if fl[1:] in RECORD_TYPES]
+    )[-1]
+    nameserver = (
+        [dispatcher.config_get("default-nameserver", "9.9.9.9")] 
+        + [fl[1:] for fl in mdata["cmd"]["arguments"] if fl.startswith("&")]
+    )[-1]
 
     try:
         resolver = dns.resolver.Resolver(configure=False)

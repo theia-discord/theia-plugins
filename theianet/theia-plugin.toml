@@ -1,6 +1,9 @@
 name = "theianet"
 run = ["python3", "-m", "theia-plugin-net"]
 
+[config]
+default-nameserver = "9.9.9.9"
+
 [[command]]
 name = "nslookup"
 aliases = ["dns"]

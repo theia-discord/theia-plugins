@@ -1,5 +1,6 @@
 import random
 
+import TheiaPy
 from TheiaPy.replies import *
 from ..dispatch import dispatcher
 

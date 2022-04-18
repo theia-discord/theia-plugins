@@ -1,0 +1,13 @@
+name = "theianet"
+run = ["python3", "-m", "theia-plugin-net"]
+
+[[command]]
+name = "nslookup"
+aliases = ["dns"]
+help = """`%! <host>` - Look up a host in DNS
+
+Defaults to searching for A records - you can specify a record type (`-A`, `-AAAA`, `-MX`, `-NS`, etc.) before the hostname. \
+To look up using a specific DNS server, add `&<nameserver>` to the end of the command.
+
+For example, to look up the AAAA record of `irys.cc`, using the CloudFlare nameservers: `%! -AAAA irys.cc &1.1.1.1`
+"""

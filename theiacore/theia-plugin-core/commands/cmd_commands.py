@@ -12,11 +12,15 @@ def cmd_commands(mdata):
             "Available commands: " 
             + ", ".join(["`" + dispatcher.bot_info["prefixes"][0] + a[0] + "`" for a in dispatcher.bot_info["commands"]])
         ),
+        "",
         (
             "Add the `-help` flag to a command for details - for example, try `"
             + dispatcher.bot_info["prefixes"][0] 
-            + random.choice(dispatcher.bot_info["commands"])[0] 
+            + random.choice(dispatcher.bot_info["commands"])[0]
             + " -help`."
+        ),
+        (
+            "For more information about Theia, see the website: <https://theia.irys.cc>"
         ),
     ])
 

@@ -1,3 +1,4 @@
+import TheiaPy
 from TheiaPy.replies import *
 from ..dispatch import dispatcher
 
@@ -10,7 +11,7 @@ def cmd_nslookup(mdata):
         import dns.resolver
     except ImportError:
         message = SendMessage().in_reply_to(mdata["message"])
-        message["content"] = "\U0000274c `dns` could not be imported."
+        message["content"] = " ".join([TheiaPy.emoji("error"), "`dns` could not be imported."])
         return message.emit()
 
     host = mdata["cmd"]["arguments"][0]
@@ -29,23 +30,23 @@ def cmd_nslookup(mdata):
 
         answer = resolver.resolve(host, rdtype=record_type, raise_on_no_answer=True)
         status = [
-            f"`{host}` ({record_type} records, nameserver: `{nameserver}`)",
+            TheiaPy.emoji("success") + f" `{host}` ({record_type} records, nameserver: `{nameserver}`)",
             "```",
             answer.rrset.to_text(),
             "```",
         ]
 
     except dns.resolver.LifetimeTimeout:
-        status = [f"\U0001f6d1 Timeout while resolving (nameserver: `{nameserver}`)"]
+        status = [TheiaPy.emoji("warning") + f" Timeout while resolving (nameserver: `{nameserver}`)"]
 
     except dns.resolver.NoNameservers:
-        status = [f"\U0001f6d1 Could not reach nameserver: `{nameserver}`"]
+        status = [TheiaPy.emoji("warning") + f" Could not reach nameserver: `{nameserver}`"]
 
     except dns.resolver.NXDOMAIN:
-        status = [f"\U0001f6d1 `{host}` is NXDOMAIN"]
+        status = [TheiaPy.emoji("warning") + f" `{host}` is NXDOMAIN"]
 
     except dns.resolver.NoAnswer:
-        status = [f"\U0001f6d1 `{host}` has no {record_type} records"]
+        status = [TheiaPy.emoji("warning") + f" `{host}` has no {record_type} records"]
 
     message = SendMessage().in_reply_to(mdata["message"])
     message["content"] = "\n".join(status)

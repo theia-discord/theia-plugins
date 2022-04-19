@@ -6,6 +6,8 @@ RECORD_TYPES = ["A", "AAAA", "CNAME", "MX", "NS", "TXT", "PTR"]
 
 @dispatcher.on_command("nslookup")
 def cmd_nslookup(mdata):
+    cmd = mdata["message"]["command_invocation"]
+
     try:
         import dns
         import dns.resolver
@@ -14,14 +16,14 @@ def cmd_nslookup(mdata):
         message["content"] = " ".join([TheiaPy.emoji("error"), "`dns` could not be imported."])
         return message.emit()
 
-    host = mdata["cmd"]["arguments"][0]
+    host = cmd["arguments"][0]
     record_type = (
         [RECORD_TYPES[0]]
-        + [fl[1:] for fl in mdata["cmd"]["start_flags"] if fl[1:] in RECORD_TYPES]
+        + [fl[1:] for fl in cmd["start_flags"] if fl[1:] in RECORD_TYPES]
     )[-1]
     nameserver = (
         [dispatcher.config_get("default-nameserver", "9.9.9.9")] 
-        + [fl[1:] for fl in mdata["cmd"]["arguments"] if fl.startswith("&")]
+        + [fl[1:] for fl in cmd["arguments"] if fl.startswith("&")]
     )[-1]
 
     try:
